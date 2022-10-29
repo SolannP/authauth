@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="3_System\" />
     <Folder Include="4_Acceptance\" />
   </ItemGroup>
 

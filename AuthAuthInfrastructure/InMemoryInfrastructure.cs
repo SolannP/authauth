@@ -24,7 +24,7 @@ public class InMemoryInfrastructure : IAccountDataInfrastructure
 
     public IEnumerable<Account?> GetInfraAccountsByMatchingLogin(Account accountToVerify) => allAccounts.Where(account => accountToVerify.EqualsLogin(account));
 
-    public List<Account?> GetAllInfraLogin() => allAccounts;
+    public List<Account?> GetAllAccount() => allAccounts;
 
     public IEnumerable<Account?> GetInfraAccountsByMatchingContact(Account accountToVerify) => allAccounts.Where(account => accountToVerify.EqualsContact(account));
 }

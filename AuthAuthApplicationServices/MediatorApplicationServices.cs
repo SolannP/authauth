@@ -1,5 +1,9 @@
 ﻿namespace AuthAuthApplicationServices;
-public class MediatorApplicationServices
+public class MediatorDirectorApplicationServices
 {
+
+    public MediatorDirectorApplicationServices()
+    {
+    } 
 
 }

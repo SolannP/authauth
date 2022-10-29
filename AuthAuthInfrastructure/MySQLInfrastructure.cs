@@ -37,7 +37,7 @@ public class MySQLInfrastructure : IAccountDataInfrastructure
     public bool DeleteInfraAccountAdministratively(Account account) => throw new NotImplementedException();
     public bool DeleteInfraAccountByFullAccountLogin(Account account) => throw new NotImplementedException();
     public IEnumerable<Account?> GetAccountsByLogin(Account account) => throw new NotImplementedException();
-    public List<Account?> GetAllInfraLogin() => throw new NotImplementedException();
+    public List<Account?> GetAllAccount() => throw new NotImplementedException();
     public IEnumerable<Account?> GetInfraAccountsByMatchingContact(Account account) => throw new NotImplementedException();
     public IEnumerable<Account?> GetInfraAccountsByMatchingLogin(Account account) => throw new NotImplementedException();
 }

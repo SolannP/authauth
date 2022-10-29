@@ -1,4 +1,5 @@
 ﻿using AuthAuthDomainModel;
+using Newtonsoft.Json;
 using System;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
@@ -7,7 +8,7 @@ using System.Text;
 namespace AuthAuthDomaineService;
 public class Account : IEquatable<Account>
 {
-    private AccountDTO _authentificationData = new();
+    protected AccountDTO _authentificationData = new();
     
     public string Contact
     {
@@ -48,5 +49,20 @@ public class Account : IEquatable<Account>
     {
         if (other is null) return false;
         return other._authentificationData.Contact.SequenceEqual(_authentificationData.Contact);
+    }
+
+    public static string Serialise(Account account)
+    {
+        return JsonConvert.SerializeObject(account._authentificationData);
+    }
+
+    public static Account Deserialize(string serializedData)
+    {
+        var authentificationData = JsonConvert.DeserializeObject<AccountDTO>(serializedData);
+        Account account = new Account("", "");
+        account._authentificationData.Login = authentificationData.Login;
+        account._authentificationData.Contact = authentificationData.Contact;
+        account._authentificationData.Password = authentificationData.Password;
+        return account;
     }
 }

@@ -12,6 +12,7 @@ public class AccountManager
     IMessageSending sendingService;
 
     public AccountManager(IAccountDataInfrastructure data) => this.data = data;
+
     /// <summary>
     /// Create an Account
     /// </summary>
@@ -36,7 +37,7 @@ public class AccountManager
     {
         bool succesfullCreation = false;
         Account account = new(contact,login, password);
-        var matchingAccount = data.GetInfraAccountsByMatchingLogin(account);
+        var matchingAccount = data.GetInfraAccountsByMatchingContact(account);
         if (matchingAccount?.Count() > 1)
             throw new ArgumentOutOfRangeException($"More than one account already exist for login: {login}");
         if (matchingAccount?.Any() ?? false)
@@ -62,7 +63,7 @@ public class AccountManager
     {
         IEnumerable<Account?> matchingAccounts;
         Account accountToCheck = new(login, password);
-        try { matchingAccounts = data.GetInfraAccountsByMatchingLogin(accountToCheck);}
+        try { matchingAccounts = data.GetInfraAccountsByMatchingContact(accountToCheck);}
         catch { return AccountAccesStatus.Error; }
         if (matchingAccounts?.Count() > 1) throw new ArgumentOutOfRangeException($"More than one account already exist for login: {login}");
         if (matchingAccounts?.Count() is 0) return AccountAccesStatus.IncorectCredential ;
@@ -75,7 +76,7 @@ public class AccountManager
         bool succesfullDelete= false;
         IEnumerable<Account?> matchingAccounts;
         Account accountToDelete = new(login, password);
-        try{ matchingAccounts = data.GetInfraAccountsByMatchingLogin(accountToDelete); }
+        try{ matchingAccounts = data.GetInfraAccountsByMatchingContact(accountToDelete); }
         catch { return AccountDeleteStatus.Error; }
         if (matchingAccounts?.Count() > 1) throw new ArgumentOutOfRangeException($"More than one account already exist for login: {login}");
         if (matchingAccounts?.Count() is 0) return AccountDeleteStatus.InexistingAccount;
@@ -91,7 +92,7 @@ public class AccountManager
 
     public List<Account?> GetAllAccounts()
     {
-        return data.GetAllInfraLogin();
+        return data.GetAllAccount();
     }
 
     public AccountDeleteStatus AdministrativDeleteAccount(string contact)
