@@ -128,6 +128,7 @@ public class SystemTestAccountManagerInMemory
     //[Test]
     public async Task TemporaryPasswordBehaviorAsync()
     {
+        /*
         var randomContact = Guid.NewGuid().ToString();
         var randomLogin = Guid.NewGuid().ToString();
         var randomPassword = Guid.NewGuid().ToString();
@@ -140,7 +141,7 @@ public class SystemTestAccountManagerInMemory
         Task<(AccountResetPasswordMessageStatus statusOnResetRequestWithEnexistingContact, string message)> SendMailToUserAsync = accountManager.AskTemporaryResetPasswordPossibility(inexistingContact);
         var CommandResult = await SendMailToUserAsync;
         Assert.That(CommandResult.statusOnResetRequestWithEnexistingContact, Is.EqualTo(AccountResetPasswordMessageStatus.InexistingAccount));
-
+        */
         /*
         (AccountResetPasswordMessageStatus statusOnResetRequestWithExistingAccount,string message) = accountManager.AskTemporaryResetPasswordPossibility(randomContact);
         Assert.That(statusOnResetRequestWithExistingAccount, Is.EqualTo(AccountResetPasswordMessageStatus.MessageSend));
@@ -153,7 +154,7 @@ public class SystemTestAccountManagerInMemory
         AccountPasswordResetStatus statusOnSettingPasswordRightAfterUserAsk = accountManager.SetNewPasswordAfterRequestReset(randomContact, temporaryPassword,newPassword);
         Assert.That(statusOnSetingPasswordIfUserConnectedAsUsualBeforeSetNewPassword, Is.EqualTo(AccountPasswordResetStatus.NewPasswordSet));*/
 
-        string newPassword = "superSTR0NGp4sswd!<3";
+        //string newPassword = "superSTR0NGp4sswd!<3";
 
     }
 }

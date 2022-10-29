@@ -138,13 +138,13 @@ public class SystemTestAccountManagerRedis
         var thridLogin = dataCreator.CreateNewLoginOrContact("test@gmx.fr");
         var thridPassword = "thridPassword";
 
-
+        var beforeTestCount = accountManager.GetAllAccounts().Count;
         accountManager.Create(firstContact, firstLogin, firstPassword);
         accountManager.Create(secondLogin, secondPassword);
         accountManager.Create(thridLogin, thridPassword);
 
         var allAccounts = accountManager.GetAllAccounts();
-        Assert.That(allAccounts.Count, Is.EqualTo(3));
+        Assert.That(allAccounts.Count, Is.EqualTo(beforeTestCount + 3));
         Assert.That(allAccounts.Where(account => account!.Equals(firstLogin)), Is.Not.Null);
         Assert.That(allAccounts.Where(account => account!.Equals(thridLogin)), Is.Not.Null);
 

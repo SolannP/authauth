@@ -61,8 +61,13 @@ public class AccountManager
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public AccountAccesStatus IsCorrectPassword(string login, string password)
     {
+        return IsCorrectPassword(login, login, password);
+    }
+
+    public AccountAccesStatus IsCorrectPassword(string contact, string login, string password)
+    {
         IEnumerable<Account?> matchingAccounts;
-        Account accountToCheck = new(login, password);
+        Account accountToCheck = new(contact,login, password);
         try { matchingAccounts = data.GetInfraAccountsByMatchingContact(accountToCheck);}
         catch { return AccountAccesStatus.Error; }
         if (matchingAccounts?.Count() > 1) throw new ArgumentOutOfRangeException($"More than one account already exist for login: {login}");
