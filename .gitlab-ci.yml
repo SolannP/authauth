@@ -102,4 +102,4 @@ build:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - rsync -avuz . root@spuygrenier.work.gd:/var/www/api_authauth
-    - ssh root@spuygrenier.work.gd "systemctl restart api"
+    - ssh root@spuygrenier.work.gd "/var/www/api_authauth/AuthAuthMicroService/bin/Debug/net6.0/AuthAuthMicroService  --urls 'http://localhost:5100'"
