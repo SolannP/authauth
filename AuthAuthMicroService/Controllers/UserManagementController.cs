@@ -118,7 +118,7 @@ public class UserManagementController : ControllerBase
     /// <param name="password"></param>
     /// <param name="contact"></param>
     /// <returns></returns>
-    [HttpDelete("user")]
+    [HttpDelete("admin/user")]
     public IActionResult AdminDelete([Required] string login, [Required] string password, string? contact)
     {
         return Ok();
