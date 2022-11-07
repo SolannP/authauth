@@ -90,7 +90,7 @@ build:
   environment:
     name: spuygrenier
     url: spuygrenier.work.gd
-  stage: build and deploy
+  stage: build
   script:
     - 'dotnet build --no-restore'
     - 'ls -lR'
