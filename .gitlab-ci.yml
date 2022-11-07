@@ -101,5 +101,5 @@ build:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - rsync -avuz . root@spuygrenier.work.gd:/var/www/api_authauth
-    - ssh root@spuygrenier.work.gd "/var/www/api_authauth/AuthAuthMicroService/bin/Debug/net6.0/AuthAuthMicroService  --urls 'http://localhost:5100'"
+    - rsync -avuz . root@spuygrenier.work.gd:/var/www/html/api_authauth
+    - ssh root@spuygrenier.work.gd "systemctl start api_authauth"
