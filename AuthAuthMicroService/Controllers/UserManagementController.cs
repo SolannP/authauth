@@ -28,7 +28,6 @@ public class UserManagementController : ControllerBase
     /// <summary>
     /// API dediacted to the user creation
     /// </summary>
-    /// <param name="contact">Way to contact the user or to adress him. If empty take the value of the login</param>
     /// <param name="login"> Login for the user</param>
     /// <param name="password">Password for the user</param>
     /// <response code="201">Succefull request creation</response>
@@ -37,10 +36,10 @@ public class UserManagementController : ControllerBase
     /// <remarks>Use redis database for performance, please do not create to much user</remarks>
     /// <exception cref="ArgumentOutOfRangeException">Rare case when result is in unknow state, i.e. not among Created|AlreadyExisting|Error </exception>
     [HttpPost("user")]
-    public IActionResult Create(string? contact, [Required] string login, [Required] string password)
+    public IActionResult Create([Required] string login, [Required] string password)
     {
         AccountCreationStatus status;
-        status = contact is null ? accountManager.Create(login, password) : accountManager.Create(contact, login, password);
+        status = accountManager.Create(login, password);
 
         switch (status)
         {
@@ -67,10 +66,10 @@ public class UserManagementController : ControllerBase
     /// <remarks>⚠If user have been created with contact data, then contact data become mandatory for correct validation</remarks>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     [HttpGet("user")]
-    public IActionResult Correct([Required] string login, [Required] string password, string? contact)
+    public IActionResult Correct([Required] string login, [Required] string password)
     {
         AccountAccesStatus status;
-        status = contact is null ? accountManager.IsCorrectPassword(login, password) : accountManager.IsCorrectPassword(contact, login, password);
+        status = accountManager.IsCorrectPassword(login, password);
 
         switch (status)
         {
