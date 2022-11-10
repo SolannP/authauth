@@ -64,7 +64,16 @@ public class RedisInfrastructure : IAccountDataInfrastructure
     {
         CheckIsInitialisedRedisDatabase();
         var db = redis.GetDatabase();
-        string accountEncriptedData = db.StringGet(account.Contact).ToString();
+        string accountEncriptedData;
+        try
+        {
+            accountEncriptedData = db.StringGet(account.Contact).ToString();
+        }
+        // if not any key in the redis base
+        catch (InvalidOperationException e)
+        {
+            accountEncriptedData = "";
+        }
         if (accountEncriptedData is null or "") return new List<Account> { };
         Account dataAccount = Account.Deserialize(accountEncriptedData);
         return new List<Account> { dataAccount };

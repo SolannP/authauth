@@ -76,7 +76,11 @@ public class UserManagementController : ControllerBase
             case AccountAccesStatus.CorrectCredential:
                 return Ok("SUCCES");
             case AccountAccesStatus.IncorectCredential:
-                return Forbid("Wrong credential provided");
+                return Problem(
+                        type: "/errors/forbidden",
+                        title: "Cannot valide the authentication",
+                        detail: $"incorect credential have been provided",
+                        statusCode: StatusCodes.Status403Forbidden);
             case AccountAccesStatus.Error:
                 return StatusCode(500);
             default:

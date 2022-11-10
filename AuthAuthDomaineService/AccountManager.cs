@@ -68,8 +68,7 @@ public class AccountManager
     {
         IEnumerable<Account?> matchingAccounts;
         Account accountToCheck = new(contact,login, password);
-        try { matchingAccounts = data.GetInfraAccountsByMatchingContact(accountToCheck);}
-        catch { return AccountAccesStatus.Error; }
+        matchingAccounts = data.GetInfraAccountsByMatchingContact(accountToCheck);
         if (matchingAccounts?.Count() > 1) throw new ArgumentOutOfRangeException($"More than one account already exist for login: {login}");
         if (matchingAccounts?.Count() is 0) return AccountAccesStatus.IncorectCredential ;
         if(matchingAccounts!.Contains(accountToCheck) is not true) return AccountAccesStatus.IncorectCredential;

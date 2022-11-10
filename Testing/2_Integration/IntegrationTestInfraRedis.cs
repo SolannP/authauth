@@ -125,6 +125,27 @@ public class IntegrationTestInfraRedis
 
     }
 
+    [Test(Author = "S.PUYGRENIER", Description = "CRD action on account")]
+    public void ReadDeleteInexistingAccount()
+    {
+        var db = redis.GetDatabase();
+
+        var randomLogin = "GorgetteDu69";
+        var randomPassword = "gorgette1950";
+        Account account = new Account(randomLogin, randomPassword);
+
+        RedisInfrastructure redisInfrastructure = new RedisInfrastructure();
+        redisInfrastructure.redis = this.redis;
+
+        var loadDataTask = db.StringGetAsync(account.Contact);
+        loadDataTask.Wait();
+        // verify
+        Assert.That(loadDataTask.Result.ToString(),Is.EqualTo(""));
+
+        var resultAccount = redisInfrastructure.GetInfraAccountsByMatchingContact(account).First();
+    }
+
+
     [Test(Author = "S.PUYGRENIER", Description = "Delete using admin account ")]
     public void CreatDeleteAsAdmin()
     {
